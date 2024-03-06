@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Команда группировки элементов коллекции по значению поля Coordinates
+ */
 public class GroupCountingByCoordinatesCommand extends Command{
     public CollectionManager collectionManager;
     public GroupCountingByCoordinatesCommand(CollectionManager collectionManager) {
@@ -23,7 +26,6 @@ public class GroupCountingByCoordinatesCommand extends Command{
     public boolean go(String arg) {
         try {
             if (!arg.isEmpty()) throw new WrongAmountOfArgumentsException();
-
             Hashtable<Integer, Ticket> ht = this.collectionManager.getTicketsCollection();
             if (ht.isEmpty()) {
                 Console.println("коллекция еще пуста.");

@@ -4,6 +4,9 @@ import org.example.exceptions.WrongAmountOfArgumentsException;
 import org.example.utility.CollectionManager;
 import org.example.utility.Console;
 
+/**
+ * Команда вывода информации о коллекции.
+ */
 public class InfoCommand extends Command {
     public InfoCommand() {
         super("info", "вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)");

@@ -3,7 +3,9 @@ package org.example.commands;
 import org.example.exceptions.WrongAmountOfArgumentsException;
 import org.example.utility.CommandManager;
 import org.example.utility.Console;
-
+/**
+ * Команда вывода текущей истории команд.
+ */
 public class HistoryCommand extends Command{
 
 

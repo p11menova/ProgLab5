@@ -4,18 +4,23 @@ import org.example.commands.*;
 
 import java.util.Scanner;
 
+/**
+ * Менеджер запуска приложения
+ */
 public class RunManager {
+    /**
+     * Запускает работу приложения: проверка установки переменной окружения, регистрация команд, запуск чтения пользовательского ввода
+     */
     public static void go() {
-
         String path = System.getenv("FILE_PATH");
-        if(path == null || path.isBlank()){
-            Console.print_error("puffа нет)");
+        if (path == null || path.isBlank()){
+            Console.print_error("нет переменной окружения. установите значение FILE_PATH командой\nexport FILE_PATH=<file_path>.\nзавершение работы программы(");
             System.exit(1);
         }
 
         FileManager fileManager = new FileManager(path);
-        CollectionManager collectionManager = new CollectionManager(fileManager);
-        collectionManager.loadCollectionFromFile();
+        CollectionManager collectionManager = new CollectionManager();
+        collectionManager.loadCollectionFromFile(fileManager);
 
         CommandManager.registerCommand(new ExitCommand());
         CommandManager.registerCommand(new HelpCommand());

@@ -1,7 +1,7 @@
 package org.example.exceptions;
 
 /**
- * Is thrown if field has wrong type
+Исключение неверного типа данных поля. Выбрасывается при попытке задать полю значение не того типа.
  */
 public class WrongFieldTypeException extends Exception{
 

@@ -15,20 +15,19 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-
-
+/**
+ * Класс Ticket
+ */
 public class Ticket implements Comparable<Ticket> {
     @JsonProperty("id")
     private Integer id;
     //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     @JsonProperty("name")
-    @JsonRawValue
     private String name; //Поле не может быть null, Строка не может быть пустой
     @JsonProperty("coordinates")
     private Coordinates coordinates; //Поле не может быть null
 
     @JsonProperty("creationDate")
-    @JsonRawValue
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy hh:mm")
     @JsonDeserialize(using = FileManager.ZonedDateTimeDeserializer.class)
@@ -38,7 +37,6 @@ public class Ticket implements Comparable<Ticket> {
     private Long price; //Поле может быть null, Значение поля должно быть больше 0
     @JsonProperty("refundable")
     private Boolean refundable; //Поле не может быть null
-    @JsonRawValue
     @JsonProperty("tickettype")
     private TicketType type; //Поле не может быть null
     @JsonProperty("person")
@@ -111,7 +109,7 @@ public class Ticket implements Comparable<Ticket> {
                 ", \n\tcoordinates=" + coordinates.toString() +
                 ", \n\tcreationDate=" + DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm").format(creationDate) +
                 ", \n\tprice=" + price +
-                ", \n\tis able to refund=" + refundable +
+                ", \n\trefundable=" + refundable +
                 ", \n\ttype=" + type.toString() +
                 ", \n\tperson=" + person.toString() +
                 '}';

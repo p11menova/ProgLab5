@@ -1,5 +1,8 @@
 package org.example.commands;
 
+/**
+ * Абстрактный класс команды. Служит родителем для всех пользовательских команд.
+ */
 public abstract class Command {
     protected String CommandName;
     protected String CommandDescription;
@@ -11,10 +14,9 @@ public abstract class Command {
     }
 
     /**
-     * Executes the Command
-     * @param arg The argument passed to the Command
-     *
-     * @return true, if command executes successfully, else - false
+     * Исполняет команду
+     * @param arg аргументы переданные в команду
+     * @return true, если команда выполнилась успешно, иначе  false
      */
 
     public abstract boolean go(String arg);
@@ -24,7 +26,6 @@ public abstract class Command {
     protected String getCommandDescription(){
         return this.CommandDescription;
     }
-
     @Override
     public String toString() {
         return  CommandName + " : " + CommandDescription;

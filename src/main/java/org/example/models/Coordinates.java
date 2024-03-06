@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
+/**
+ * Класс Координат (x, y)
+ */
 public class Coordinates {
     public static int xMin = -957;
     public static int yMax = 979;

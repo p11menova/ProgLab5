@@ -11,6 +11,9 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Команда удаления элементов коллекции, чье поле person эквивалентно заданному
+ */
 public class RemoveAllByPersonCommand extends Command{
     public CollectionManager collectionManager;
     public RemoveAllByPersonCommand(CollectionManager collectionManager) {

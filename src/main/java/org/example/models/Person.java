@@ -16,9 +16,11 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * Класс Человека
+ */
 public class Person {
     @JsonProperty("birthday")
-    @JsonRawValue
     @JsonSerialize(using=LocalDateTimeSerializer.class)
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -42,7 +44,6 @@ public class Person {
                 ", \n\t\theight=" + height +
                 '}';
     }
-
     @Override
     public boolean equals(Object obj) {
         if (!obj.getClass().equals(Person.class)) return false;

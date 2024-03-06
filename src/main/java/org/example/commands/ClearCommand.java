@@ -4,6 +4,9 @@ import org.example.exceptions.WrongAmountOfArgumentsException;
 import org.example.utility.CollectionManager;
 import org.example.utility.Console;
 
+/**
+ * Команда очистки коллекции.
+ */
 public class ClearCommand extends Command{
     public CollectionManager collectionManager;
     public ClearCommand(CollectionManager collectionManager) {

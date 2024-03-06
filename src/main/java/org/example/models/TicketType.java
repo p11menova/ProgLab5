@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
 
-
+/**
+ * Класс перечисления типов билетов
+ */
 public enum TicketType {
     VIP,
     USUAL,

@@ -25,18 +25,37 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
 
-
+/**
+ * Класс управления работы с файлом коллекции: прочитать коллекцию из файла, загрузить коллекцию в файл (расширение .xml)
+ */
 public class FileManager {
+    /**
+     * Название файла
+     */
     public String filename;
-    public Hashtable<Integer, Ticket> collection;
 
+    /**
+     * Конструктор FileManager'a
+     *
+     * @param filename название файла, хранящего коллекцию
+     */
     public FileManager(String filename) {
         this.filename = filename;
 
     }
 
+    /**
+     * Читает текст из файла
+     *
+     * @return текст из файла
+     */
     public String readFileText() {
         try {
+            File file = new File(this.filename);
+            if (!file.canRead()) {
+                Console.println("файл не имеет прав на чтение(");
+                return "";
+            }
             FileReader reader = new FileReader(this.filename);
             BufferedReader br = new BufferedReader(reader);
             String line;
@@ -54,6 +73,11 @@ public class FileManager {
 
     }
 
+    /**
+     * Преобразует данные из файла в экземпляры коллекции и добавляет их в неё
+     *
+     * @param collectionManager менеджер управления коллекцией
+     */
     public void addDataToCollection(CollectionManager collectionManager) {
         try {
             XmlMapper xmlMapper = new XmlMapper();
@@ -85,17 +109,23 @@ public class FileManager {
 
     ;
 
+    /**
+     * Кастомный Десерилиазатор для типа ZonedDateTime
+     */
     public static class ZonedDateTimeDeserializer extends JsonDeserializer<ZonedDateTime> {
-
         @Override
         public ZonedDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
             LocalDate localDate = LocalDate.parse(p.getText(), dateTimeFormatter);
-
             return localDate.atStartOfDay(ZoneOffset.UTC);
         }
     }
+
+    /**
+     * Записывает коллекцию в файл
+     * @param collectionManager менеджер коллекции
+     * @return true, если запись прошла успешно, иначе false
+     */
 
     public boolean writeCollectionToFile(CollectionManager collectionManager) {
         XmlMapper xmlMapper = new XmlMapper();
@@ -111,7 +141,13 @@ public class FileManager {
 
         try {
             String data = xmlMapper.writeValueAsString(tickets);
+            File file = new File(this.filename);
+            if (!new File(this.filename).canWrite()) {
+                Console.println("файл не имеет прав на запись( коллекция не будет записана(");
+                return false;
+            }
             OutputStream outputStream = new FileOutputStream(this.filename);
+
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
             if (data == null) return true;
 
@@ -124,11 +160,12 @@ public class FileManager {
         } catch (JsonProcessingException e) {
             Console.print_error(e.getMessage());
         } catch (FileNotFoundException e) {
-            Console.print_error("файл с таким названием не найден.");
+            Console.print_error("файл с таким названием не найден.. или нет прав доступа(");
         } catch (IOException e) {
             Console.print_error("ошибка сохранения коллекции в файл(");
         }
         return false;
-    }}
+    }
+}
 
 

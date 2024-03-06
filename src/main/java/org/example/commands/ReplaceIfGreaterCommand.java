@@ -6,6 +6,9 @@ import org.example.models.Ticket;
 import org.example.utility.CollectionManager;
 import org.example.utility.Console;
 
+/**
+ * Команда замены экземпляра коллекции, на новый, если он больше старого.
+ */
 public class ReplaceIfGreaterCommand extends AbstractAddCommand {
     public ReplaceIfGreaterCommand(CollectionManager collectionManager) {
         super("replace_if_greater {key} {element}",

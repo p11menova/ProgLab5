@@ -7,6 +7,9 @@ import org.example.models.Ticket;
 import org.example.utility.CollectionManager;
 import org.example.utility.Console;
 
+/**
+ * Команда замены экземпляра коллекции, на новый, если он меньше старого.
+ */
 public class ReplaceIfLowerCommand extends AbstractAddCommand {
     public ReplaceIfLowerCommand(CollectionManager collectionManager) {
         super("replace_if_lower {key} {element}",

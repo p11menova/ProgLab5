@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Класс списка билетов (заполняется при чтении файла .xml)
+ */
 @JacksonXmlRootElement(localName = "tickets")
 public class Tickets {
     @JacksonXmlProperty(localName = "ticket")
@@ -18,10 +21,15 @@ public class Tickets {
         this.tickets.add(ticket);
     }
 
+    /**
+     * Добавляет валидные элементы списка Tickets в коллекцию
+     * @param collectionManager менеджер коллекции
+     * @return true, если был добавлен хоть один билет, false, если все не валидны
+     */
     public boolean addToCollectionIfOkay(CollectionManager collectionManager){
         AtomicBoolean are_added = new AtomicBoolean(false);
         for (Ticket ticket: tickets){
-            if (new NewTicketAsker().validateTicket(ticket)){
+            if (new NewTicketAsker().validateTicket(collectionManager, ticket)){
                 collectionManager.addToCollection(ticket);
             are_added.set(true);}
         }

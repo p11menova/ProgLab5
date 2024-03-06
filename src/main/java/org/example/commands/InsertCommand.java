@@ -8,6 +8,9 @@ import org.example.utility.CollectionManager;
 import org.example.utility.Console;
 import org.example.utility.ModelsAskers.NewTicketAsker;
 
+/**
+ * Команда добавления нового элемента коллекции с заданным ключом.
+ */
 public class InsertCommand extends AbstractAddCommand {
     private Ticket new_ticket;
 
@@ -15,7 +18,6 @@ public class InsertCommand extends AbstractAddCommand {
         super("insert {key} {element}", "добавить новый элемент с заданным ключом", collectionManager);
         this.new_ticket = new Ticket();
     }
-
 
     @Override
     public boolean go(String arg) {

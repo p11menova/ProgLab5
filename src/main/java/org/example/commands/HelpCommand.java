@@ -5,6 +5,9 @@ import org.example.utility.Console;
 
 import java.util.Map;
 
+/**
+ * Команда получения справки по доступным командам.
+ */
 public class HelpCommand extends Command {
 
     public HelpCommand() {

@@ -9,6 +9,9 @@ import org.example.utility.Console;
 import java.util.Hashtable;
 import java.util.Map;
 
+/**
+ * Команда удаления экземпляров коллекции, превышающих заданный.
+ */
 public class RemoveIfGreaterCommand extends Command{
     private CollectionManager collectionManager;
     public RemoveIfGreaterCommand(CollectionManager collectionManager) {

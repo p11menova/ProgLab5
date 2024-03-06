@@ -5,6 +5,9 @@ import org.example.exceptions.WrongAmountOfArgumentsException;
 import org.example.utility.CollectionManager;
 import org.example.utility.Console;
 
+/**
+ * Команда удаления элемента коллекции по ключу.
+ */
 public class RemoveByKeyCommand extends Command{
     private CollectionManager collectionManager;
     public RemoveByKeyCommand(CollectionManager collectionManager) {

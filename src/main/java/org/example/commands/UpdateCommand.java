@@ -6,6 +6,9 @@ import org.example.models.Ticket;
 import org.example.utility.CollectionManager;
 import org.example.utility.Console;
 
+/**
+ * Команда обновления элемента коллекции по заданному ключу.
+ */
 public class UpdateCommand extends AbstractAddCommand {
     public UpdateCommand(CollectionManager collectionManager) {
         super("update {key} {element}", " обновить значение элемента коллекции, айди которого равен заданному", collectionManager);

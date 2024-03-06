@@ -5,6 +5,9 @@ import org.example.utility.CollectionManager;
 import org.example.utility.CommandManager;
 import org.example.utility.Console;
 
+/**
+ * Команда вывода информации о коллекции в стандартный поток вывода.
+ */
 public class ShowCommand extends Command {
     private final CollectionManager collectionManager;
     public ShowCommand(CollectionManager collectionManager){

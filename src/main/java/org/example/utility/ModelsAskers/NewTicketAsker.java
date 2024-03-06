@@ -8,22 +8,35 @@ import org.example.exceptions.wrongRangeExceptions.WrongYCoordRangeException;
 import org.example.models.Coordinates;
 import org.example.models.Ticket;
 import org.example.models.TicketType;
+import org.example.utility.CollectionManager;
 import org.example.utility.Console;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Класс запроса и валидации нового экземпляра типа Ticket
+ */
 public class NewTicketAsker {
+    /**
+     * Новый экземпляр Ticket
+     */
     private final Ticket ticket;
 
-
+    /**
+     * Конструктор
+     */
     public NewTicketAsker() {
         this.ticket = new Ticket();
         this.ticket.set_coordinates(new Coordinates());
     }
 
-
+    /**
+     * Валидация имени экземпляра Ticket
+     * @param name имя
+     * @return true, если имя корректно, иначе false
+     */
     public boolean validateName(String name) {
         if (name == null || name.isEmpty()) {
             Console.print_error("имя не может быть null (");
@@ -33,7 +46,11 @@ public class NewTicketAsker {
         this.ticket.set_name(name);
         return true;
     }
-
+    /**
+     * Валидация X координаты экземпляра Ticket
+     * @param XCoord Х координата
+     * @return true, если Х координата корректна, иначе false
+     */
     public boolean validateCoordinateX(String XCoord) {
         if (XCoord.isEmpty()) {
             Console.print_error("Координата Х не может быть null");
@@ -54,7 +71,11 @@ public class NewTicketAsker {
         }
         return false;
     }
-
+    /**
+     * Валидация У координаты экземпляра Ticket
+     * @param YCoord Y координата
+     * @return true, если Y координата корректна, иначе false
+     */
     public boolean validateCoordinateY(String YCoord) {
         if (YCoord.isEmpty()) {
             Console.print_error("Координата Y не могут быть null");
@@ -76,6 +97,11 @@ public class NewTicketAsker {
         return false;
     }
 
+    /**
+     * Валидация цены экземпляра Ticket
+     * @param price цена
+     * @return true, если цена корректна, иначе false
+     */
     public boolean validatePrice(String price) {
         try {
             if (price.isEmpty()) {
@@ -95,10 +121,13 @@ public class NewTicketAsker {
         ;
         return false;
     }
-
+    /**
+     * Валидация поля "возвратен ли билет" экземпляра Ticket
+     * @param ref поле "возвратен ли билет"
+     * @return true, если поле "возвратен ли билет" корректно, иначе false
+     */
     public boolean validateRefundable(String ref) {
         try {
-
             if (!(ref.equalsIgnoreCase("true") || ref.equalsIgnoreCase("false")))
                 throw new WrongFieldTypeException();
             this.ticket.set_refundable(Boolean.parseBoolean(ref));
@@ -110,7 +139,11 @@ public class NewTicketAsker {
         return false;
 
     }
-
+    /**
+     * Валидация Типа экземпляра Ticket.
+     * @param ttype тип билета
+     * @return true, если тип билета корректен, иначе false
+     */
     public boolean validateTicketType(String ttype) {
         if (ttype.isEmpty()) {
             Console.print_error("Тип билета не может быть null(");
@@ -129,8 +162,18 @@ public class NewTicketAsker {
         return false;
     }
 
-    public boolean validateTicket(Ticket ticket) {
+    /**
+     * Валидация экземпляра Ticket. (Ввод данных из файла .xml)
+     * @param collectionManager менеджер коллекции
+     * @param ticket экземпляр
+     * @return true, если ticket валиден (валидны все поля класса), иначе false
+     */
+    public boolean validateTicket(CollectionManager collectionManager, Ticket ticket) {
         AtomicBoolean is_okay = new AtomicBoolean(false);
+        if (collectionManager.isIdTaken(ticket.get_id())){
+            Console.print_error("айди "+ticket.get_id()+" уже занят( будет добавлен первый экземпляр.");
+            return false;
+        }
         is_okay.set(
                 validateName(ticket.get_name()) &&
                         validateCoordinateX(ticket.get_coodinates().get_CoordX().toString()) &&
@@ -140,9 +183,13 @@ public class NewTicketAsker {
         return is_okay.get();
     }
 
+    /**
+     * Валидация экземпляра Ticket. (Ввод данных из скрипта)
+     * @param id id билета
+     * @return валидный экземпляр класса Ticket, иначе null
+     */
     public Ticket validateTicketFromScript(int id) {
         this.ticket.set_id(id);
-
 
         String name = Console.script_in.nextLine().trim();
         String coordx = Console.script_in.nextLine().trim();
@@ -162,6 +209,11 @@ public class NewTicketAsker {
 
     }
 
+    /**
+     * Валидация экземпляра Ticket. (Ввод данных из стандартного потока)
+     * @param id id нового экземпляра
+     * @return новый экземпляр класса Ticket
+     */
     public Ticket validateTicketFromInteractiveMode(int id) {
 
         AtomicBoolean correctName = new AtomicBoolean(false);
